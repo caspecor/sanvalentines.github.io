@@ -34,8 +34,11 @@ function generateLink() {
     // Get base URL (works both locally and on GitHub Pages)
     const baseUrl = window.location.origin + window.location.pathname.replace('index.html', '');
 
-    // Create personalized URL with encoded name
-    const personalizedUrl = `${baseUrl}proposal.html?name=${encodeURIComponent(name)}`;
+    // Encode name to Base64 (supporting UTF-8 characters)
+    const encodedName = btoa(unescape(encodeURIComponent(name)));
+
+    // Create personalized URL with encoded name (using 'v' for 'value' to be more opaque)
+    const personalizedUrl = `${baseUrl}proposal.html?v=${encodedName}`;
 
     // Show result section
     resultSection.style.display = 'block';

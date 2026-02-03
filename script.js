@@ -1,13 +1,34 @@
 // Read name from URL parameters
 const urlParams = new URLSearchParams(window.location.search);
-const personName = urlParams.get('name');
+let personName = urlParams.get('v'); // New encoded parameter
+let isEncoded = true;
+
+// Fallback to old 'name' parameter if 'v' is not present
+if (!personName) {
+    personName = urlParams.get('name');
+    isEncoded = false;
+}
 
 // If no name provided, redirect to generator
 if (!personName || personName.trim() === '') {
     window.location.href = 'index.html';
 } else {
-    // Update the name in the page
-    document.getElementById('personName').textContent = decodeURIComponent(personName);
+    // Decode name
+    let decodedName;
+    try {
+        if (isEncoded) {
+            // Decode Base64 (supporting UTF-8 characters)
+            decodedName = decodeURIComponent(escape(atob(personName)));
+        } else {
+            decodedName = decodeURIComponent(personName);
+        }
+
+        // Update the name in the page
+        document.getElementById('personName').textContent = decodedName;
+    } catch (e) {
+        console.error('Error decoding name:', e);
+        window.location.href = 'index.html';
+    }
 }
 
 const yesBtn = document.getElementById('yesBtn');
