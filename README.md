@@ -4,7 +4,7 @@ Una página web interactiva y romántica para hacer una propuesta de San Valent�
 
 ## 🌐 Demo en Vivo
 
-**[Ver la página aquí](https://caspecor.github.io/sanvalentines.github.io/)**
+**[Ver la página aquí](https://caspecor.github.io/sanvalentines/)**
 
 ## ✨ Características
 
